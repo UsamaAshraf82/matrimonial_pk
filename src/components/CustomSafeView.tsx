@@ -6,17 +6,18 @@ import {
   SafeAreaProvider,
   SafeAreaView,
 } from "react-native-safe-area-context";
+import tailwind from "~/utils/tailwind";
 
 const CustomSafeView = ({ children }: PropsWithChildren) => {
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-      <View className="flex-1 bg-[#1f211e]">
-        <StatusBar backgroundColor={"#1f211e"} style="light" />
+      <View className="flex-1 bg-rose-600">
+        <StatusBar backgroundColor={tailwind.theme.colors.rose[600]} style="light" />
         <KeyboardAvoidingViewP>
           <SafeAreaView
             edges={["bottom", "left", "right", "top"]}
             // style={{ flex: 1 }}
-            className="flex-1 bg-[#1f211e]"
+            className="flex-1 bg-rose-600"
           >
             {children}
           </SafeAreaView>

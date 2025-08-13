@@ -8,7 +8,8 @@ import CustomSafeView from "~/components/CustomSafeView";
 import useUser from "~/Store/useUser";
 import { ParseInit } from "~/utils/Parse";
 
-import "@/global.css";
+import "../../global.css";
+
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {

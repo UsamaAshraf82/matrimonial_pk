@@ -1,7 +1,6 @@
 // import { delete_cookie, get_cookie } from '@/actions/cookie';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Parse from "parse/react-native";
-import Toast from "react-native-toast-message";
 import { create } from "zustand";
 import { User_Type } from "~/types/user";
 
@@ -19,32 +18,23 @@ const useUser = create<Store>()((set) => ({
   login: async (username, password) => {
     // Example Parse login
 
-    if (password === "123") {
-      set({ user: true });
-      Toast.show({
-        type: "success",
-        text1: "Password Correct",
-      });
-      return;
+    try{
+    const user = (await Parse.User.logIn(
+      username.toLowerCase().trim(),
+      password
+    )) as Parse.User<User_Type>;
+    if (user.attributes.sessionToken) {
+      await AsyncStorage.setItem("session_token", user.attributes.sessionToken);
     }
-
-    Toast.show({
-      type: "error",
-      text1: "Password Incorrect",
-      text2: "Correct Password is 123",
-    });
-    // const user = (await Parse.User.logIn(
-    //   username,
-    //   password
-    // )) as Parse.User<User_Type>;
-    // if (user.attributes.sessionToken) {
-    //   await AsyncStorage.setItem("session_token", user.attributes.sessionToken);
-    // }
-    // set({ user });
+    set({ user });
+  }catch(e){
+    console.log(e)
+  }
   },
 
-  signup: async (email, password) => {
+  signup: async (_email, password) => {
     // Example Parse login
+    const email = _email.toLowerCase().trim();
 
     const newUser: Parse.User<User_Type> = new Parse.User();
     newUser.set("email", email);
@@ -70,8 +60,8 @@ const useUser = create<Store>()((set) => ({
     }
   },
   logout: async () => {
-    // await Parse.User.logOut();
-    // await AsyncStorage.removeItem("session_token");
+    await Parse.User.logOut();
+    await AsyncStorage.removeItem("session_token");
     set({ user: null });
   },
 }));

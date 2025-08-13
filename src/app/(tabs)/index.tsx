@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import { Dimensions, TouchableOpacity, View } from "react-native";
 import { interpolate } from "react-native-reanimated";
 import Carousel, { TAnimationStyle } from "react-native-reanimated-carousel";
+import tailwind from "~/utils/tailwind";
 
 // const data = [
 
@@ -34,6 +35,9 @@ const Index = () => {
         `https://api.unsplash.com/photos/random?${searchParams.toString()}`
       );
       const data: unsplashType[] = await response.json();
+
+      console.log(data)
+
       setData(
         data.map((item) => ({
           src: item.urls.regular,
@@ -58,6 +62,7 @@ const Index = () => {
       opacity,
     };
   }, []);
+
 
   return (
     <View
@@ -128,7 +133,7 @@ const Item = ({ img }: { img: { src: string; blurhash: string } }) => {
         }}
       >
         <View className="absolute bottom-24 flex-1 items-center justify-center left-10 z-10 bg-red-700 rounded-full w-20 h-20">
-          <X />
+          <X strokeWidth={3} color={tailwind.theme.colors.white} />
           {/* <FontAwesome name="times" size={40} color="white" /> */}
         </View>
       </TouchableOpacity>

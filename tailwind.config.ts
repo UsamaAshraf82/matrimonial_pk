@@ -1,9 +1,8 @@
 const { hairlineWidth } = require('nativewind/theme');
-
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import type { Config } from "tailwindcss";
+const config: Config = {
   darkMode: 'class',
-  content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
+  content: ['./src/**/*.{ts,tsx}'],
   presets: [require('nativewind/preset')],
   theme: {
     extend: {
@@ -62,4 +61,6 @@ module.exports = {
     },
   },
   plugins: [require('tailwindcss-animate')],
-};
+} as const;
+
+export default config;

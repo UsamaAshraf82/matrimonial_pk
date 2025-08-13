@@ -6,9 +6,9 @@ import {
   Pressable,
   ScrollView,
   Text,
-  TextInput,
-  View,
+  View
 } from "react-native";
+import { Input } from "~/components/ui/input";
 import useUser from "~/Store/useUser";
 
 export default function LoginScreen() {
@@ -16,6 +16,8 @@ export default function LoginScreen() {
   const { login } = useUser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  console.log('login')
 
   const handleLogin = async () => {
     // Normally you'd call your API here
@@ -37,7 +39,7 @@ export default function LoginScreen() {
         <Text className="text-gray-500 mb-8">Sign in to continue</Text>
 
         {/* Email */}
-        <TextInput
+        <Input
           placeholder="Email"
           value={email}
           onChangeText={setEmail}
@@ -46,7 +48,7 @@ export default function LoginScreen() {
         />
 
         {/* Password */}
-        <TextInput
+        <Input
           placeholder="Password"
           value={password}
           onChangeText={setPassword}

@@ -1,7 +1,8 @@
 import tailwindConfig from "@/tailwind.config";
 import resolveConfig from "tailwindcss/resolveConfig";
+// import type { ThemeConfig } from "tailwindcss/types/config";
 
-// Load your Tailwind config into JS
-const tailwind = resolveConfig(tailwindConfig);
+
+const tailwind = resolveConfig(tailwindConfig)
 
 export default tailwind;
